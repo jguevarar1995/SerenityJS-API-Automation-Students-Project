@@ -5,7 +5,7 @@ import { Actors } from "../../src/Actors";
 
 
 configure({
-  actors: new Actors(process.env.BASE_API_URL || ""),
+  actors: new Actors(process.env.BASE_API_URL || "http://localhost:3000"),
   crew: [
     ConsoleReporter.withDefaultColourSupport(),
     new SerenityBDDReporter(),
