@@ -1,5 +1,5 @@
 export interface LoginResponse {
-    message: string,
+    message: string | string[],
     status: number,
     user: UserData
 }

@@ -18,3 +18,7 @@ Then('the login should be successful', async () => {
     const loginEmail : string = await recall(actorMemories.LOGIN_EMAIL); 
     await loginTask.validateSuccessLoginResponse(loginEmail);
 });
+
+Then('user should not be able to log in', async () => {
+    await loginTask.validateUnauthorizedLoginResponse();
+});
