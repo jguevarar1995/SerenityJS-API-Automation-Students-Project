@@ -5,16 +5,16 @@ import { actorMemories } from '../../src/constants/actorMemories';
 import { loginInteractions } from '../../src/interactions/loginInteractions';
 import { loginTask } from '../../src/tasks/loginTask';
 
-Given('{actor} is a registered user',  async (actor : Actor) => {
-    Log.the(`${actor.name} started the tests execution`).performAs(actorInTheSpotlight());
+Given('that an {actor} user is registered',  async (actor : Actor) => {
+    Log.the(`${actor.name} wants to login into students system`).performAs(actorInTheSpotlight());
 });
 
-When('login with email {string} and password {string}', async (email : string, password : string) => {
+When('logs in with email {string} and password {string}', async (email : string, password : string) => {
     await loginInteractions.postLogin(email, password);
     await remember(actorMemories.LOGIN_EMAIL, email);
 });
 
-Then('the login is finalized successfully', async () => {
+Then('the login should be successful', async () => {
     const loginEmail : string = await recall(actorMemories.LOGIN_EMAIL); 
     await loginTask.validateSuccessLoginResponse(loginEmail);
 });
