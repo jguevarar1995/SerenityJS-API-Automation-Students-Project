@@ -1,4 +1,4 @@
 export const actorMemories = {
-    LOGIN_EMAIL: "login_email"
-  };
+    LOGIN_EMAIL: 'login_email'
+};
   

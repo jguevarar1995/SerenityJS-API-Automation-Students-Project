@@ -1,14 +1,14 @@
-import { LoginBuilder } from "../dtos/payloads/builders/loginBuilder"
-import { actorInTheSpotlight } from "@serenity-js/core";
-import { LoginPayload } from "../dtos/payloads/loginPayload"
-import { encrypt } from "../helpers/encrypt"
-import { LastResponse, PostRequest, Send } from "@serenity-js/rest";
-import { endpoints } from "../constants/endpoints";
-import { LoginResponse } from "../dtos/responses/loginResponse";
-import { configs } from "../helpers/configs";
+import { actorInTheSpotlight } from '@serenity-js/core';
+import { PostRequest, Send } from '@serenity-js/rest';
+
+import { endpoints } from '../constants/endpoints';
+import { LoginBuilder } from '../dtos/payloads/builders/loginBuilder'
+import { LoginPayload } from '../dtos/payloads/loginPayload'
+import { configs } from '../helpers/configs';
+import { encrypt } from '../helpers/encrypt'
 
 export const loginInteractions = {
-    postLogin: async(email: string, password: string) => {
+    postLogin: async(email: string, password: string): Promise<void> => {
         const loginPayload: LoginPayload = LoginBuilder(email, encrypt(password));
 
         await actorInTheSpotlight().attemptsTo(

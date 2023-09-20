@@ -1,6 +1,6 @@
 export const httpCodes = {
-    OK: 200,
     CREATED: 201,
-    UNAUTHORIZED: 401,
-    NOT_FOUND: 404
+    NOT_FOUND: 404,
+    OK: 200,
+    UNAUTHORIZED: 401
 };

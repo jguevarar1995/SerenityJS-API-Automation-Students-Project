@@ -1,6 +1,7 @@
-import { actorInTheSpotlight } from "@serenity-js/core"
-import { LoginResponse } from "../dtos/responses/loginResponse"
-import { LastResponse } from "@serenity-js/rest"
+import { actorInTheSpotlight } from '@serenity-js/core'
+import { LastResponse } from '@serenity-js/rest'
+
+import { LoginResponse } from '../dtos/responses/loginResponse'
 
 export const loginQuestion = {
     getLoginResponse: async() : Promise <LoginResponse> => {

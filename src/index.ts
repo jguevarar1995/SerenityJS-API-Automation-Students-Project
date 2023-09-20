@@ -1,1 +1,1 @@
-export * from "./Actors";
+export * from './Actors';

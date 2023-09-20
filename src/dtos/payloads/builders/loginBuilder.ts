@@ -1,4 +1,4 @@
-import { LoginPayload } from "../loginPayload";
+import { LoginPayload } from '../loginPayload';
 
 export const LoginBuilder = (
     email: string,

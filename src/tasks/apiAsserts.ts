@@ -1,11 +1,12 @@
-import { Ensure, equals } from "@serenity-js/assertions";
-import { TestCompromisedError, actorInTheSpotlight } from "@serenity-js/core";
-import { LastResponse } from "@serenity-js/rest";
-import { apiQuestion } from "../questions/default/apiQuestion"
-import { assertEnsure } from "./assertEnsure";
+import { Ensure, equals } from '@serenity-js/assertions';
+import { actorInTheSpotlight,TestCompromisedError } from '@serenity-js/core';
+import { LastResponse } from '@serenity-js/rest';
+
+import { apiQuestion } from '../questions/default/apiQuestion'
+import { assertEnsure } from './assertEnsure';
 
 export const apiAsserts = {
-    statusCode: async(expectedStatusCode : number) => {
+    statusCode: async(expectedStatusCode : number): Promise<void> => {
         const lastResponseStatusCode : number = await apiQuestion.getStatusCode();
         if(assertEnsure.that.isEqualTo(lastResponseStatusCode, expectedStatusCode)) {
             await actorInTheSpotlight().attemptsTo(

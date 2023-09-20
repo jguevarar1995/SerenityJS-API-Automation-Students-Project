@@ -1,5 +1,5 @@
-import { SHA256, enc } from 'crypto-js';
+import { enc,SHA256 } from 'crypto-js';
 
-export const encrypt = (text: string) => {
+export const encrypt = (text: string): string => {
     return SHA256(text).toString(enc.Hex);
 };
