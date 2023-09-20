@@ -1,7 +1,7 @@
-import { EnsureEventually } from "@serenity-js/assertions";
-import type { Answerable, AnswersQuestions, CollectsArtifacts, Expectation, RuntimeError, UsesAbilities } from "@serenity-js/core";
-import { Activity, AssertionError, d, ExpectationMet, ExpectationNotMet, f, Interaction, LogicError, RaiseErrors } from "@serenity-js/core";
-import type { FileSystemLocation } from "@serenity-js/core/lib/io";
+import { EnsureEventually } from '@serenity-js/assertions';
+import type { Answerable, AnswersQuestions, CollectsArtifacts, Expectation, UsesAbilities } from '@serenity-js/core';
+import { Activity, AssertionError, d, ExpectationMet, ExpectationNotMet, f, Interaction, LogicError, RaiseErrors } from '@serenity-js/core';
+import type { FileSystemLocation } from '@serenity-js/core/lib/io';
 
 /**
  * The {@apilink Interaction|interaction} to `Ensure`
@@ -11,8 +11,8 @@ import type { FileSystemLocation } from "@serenity-js/core/lib/io";
  * @group Activities
  */
 export class BussinessEnsure<Actual> extends Interaction {
-  exceptionMessage: string;
-  /**
+    exceptionMessage: string;
+    /**
    * Creates an {@apilink Interaction|interaction} to `Ensure`, which
    * verifies if the resolved value of the provided {@apilink Answerable}
    * meets the specified {@apilink Expectation}.
@@ -26,11 +26,11 @@ export class BussinessEnsure<Actual> extends Interaction {
    *
    * @returns {Ensure<Actual_Type>}
    */
-  static that<Actual_Type>(actual: Answerable<Actual_Type>, expectation: Expectation<Actual_Type>, message: string, errorMessage: string): BussinessEnsure<Actual_Type> {
-    return new BussinessEnsure(actual, expectation, message, errorMessage, Activity.callerLocation(5));
-  }
+    static that<Actual_Type>(actual: Answerable<Actual_Type>, expectation: Expectation<Actual_Type>, message: string, errorMessage: string): BussinessEnsure<Actual_Type> {
+        return new BussinessEnsure(actual, expectation, message, errorMessage, Activity.callerLocation(5));
+    }
 
-  /**
+    /**
    * Creates an {@apilink Interaction|interaction} to {@apilink EnsureEventually}, which
    * verifies if the resolved value of the provided {@apilink Answerable}
    * meets the specified {@apilink Expectation} within the expected timeframe.
@@ -47,40 +47,39 @@ export class BussinessEnsure<Actual> extends Interaction {
    *
    * @returns {Ensure<Actual_Type>}
    */
-  static eventually<Actual_Type>(actual: Answerable<Actual_Type>, expectation: Expectation<Actual_Type>): EnsureEventually<Actual_Type> {
-    return new EnsureEventually(actual, expectation, Activity.callerLocation(5));
-  }
+    static eventually<Actual_Type>(actual: Answerable<Actual_Type>, expectation: Expectation<Actual_Type>): EnsureEventually<Actual_Type> {
+        return new EnsureEventually(actual, expectation, Activity.callerLocation(5));
+    }
 
-  /**
+    /**
    * @param actual
    * @param expectation
    * @param location
    */
-  private constructor(protected readonly actual: Answerable<Actual>, protected readonly expectation: Expectation<Actual>, message: string, errorMessage: string, location: FileSystemLocation) {
-    super(d`#actor ensures that => ${message}`, location);
-    this.exceptionMessage = errorMessage;
-  }
+    private constructor(protected readonly actual: Answerable<Actual>, protected readonly expectation: Expectation<Actual>, message: string, errorMessage: string, location: FileSystemLocation) {
+        super(d`#actor ensures that => ${message}`, location);
+        this.exceptionMessage = errorMessage;
+    }
 
-  /**
+    /**
    * @inheritDoc
    */
-  async performAs(actor: UsesAbilities & AnswersQuestions & CollectsArtifacts): Promise<void> {
-    const outcome = await actor.answer(this.expectation.isMetFor(this.actual));
+    async performAs(actor: UsesAbilities & AnswersQuestions & CollectsArtifacts): Promise<void> {
+        const outcome = await actor.answer(this.expectation.isMetFor(this.actual));
 
-    if (outcome instanceof ExpectationNotMet) {
-      const actualDescription = d`${this.actual}`;
-      const message = `Error => ${this.exceptionMessage}`;
+        if (outcome instanceof ExpectationNotMet) {
+            const message = `Error => ${this.exceptionMessage}`;
 
-      throw RaiseErrors.as(actor).create(AssertionError, {
-        message,
-        expectation: outcome.expectation,
-        diff: { expected: outcome.expected, actual: outcome.actual },
-        location: this.instantiationLocation(),
-      });
+            throw RaiseErrors.as(actor).create(AssertionError, {
+                message,
+                expectation: outcome.expectation,
+                diff: { expected: outcome.expected, actual: outcome.actual },
+                location: this.instantiationLocation(),
+            });
+        }
+
+        if (!(outcome instanceof ExpectationMet)) {
+            throw new LogicError(f`Expectation#isMetFor(actual) should return an instance of an ExpectationOutcome, not ${outcome}`);
+        }
     }
-
-    if (!(outcome instanceof ExpectationMet)) {
-      throw new LogicError(f`Expectation#isMetFor(actual) should return an instance of an ExpectationOutcome, not ${outcome}`);
-    }
-  }
 }

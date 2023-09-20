@@ -1,5 +1,5 @@
-import { actorInTheSpotlight } from "@serenity-js/core"
-import { LastResponse } from "@serenity-js/rest"
+import { actorInTheSpotlight } from '@serenity-js/core'
+import { LastResponse } from '@serenity-js/rest'
 
 export const apiQuestion = {
     getStatusCode: async () : Promise<number> => {
