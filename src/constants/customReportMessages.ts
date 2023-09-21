@@ -1,6 +1,8 @@
 export const customReportMessages = {
-    LOGIN_RESPONSE_BODY_IS_EMPTY: 'The login response body is empty',
-    LOGIN_RESPONSE_BODY_IS_NOT_EMPTY: 'The login response body is not empty',
+    RESPONSE_BODY_IS_EMPTY: 'The response body is empty',
+    RESPONSE_BODY_IS_NOT_EMPTY: 'The response body is not empty',
+    STUDENT_IS_NOT_REGISTERED: 'The student is not registered',
+    STUDENT_IS_REGISTERED: 'The student is registered',
     USER_EXPECTED_DATA: 'The user data is equal to expected',
     USER_IS_AUTHORIZED_OR_DOES_NOT_EXISTS: 'The user credentials are valid or the user does not exists',
     USER_IS_FOUND: 'The user is already registered',

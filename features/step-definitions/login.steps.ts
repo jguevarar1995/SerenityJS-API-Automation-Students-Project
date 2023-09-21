@@ -2,9 +2,15 @@ import { Given, Then, When } from '@cucumber/cucumber';
 import { Actor, actorInTheSpotlight,Log } from '@serenity-js/core';
 
 import { actorMemories } from '../../src/constants/actorMemories';
+import { constants } from '../../src/constants/constants';
 import { recall, remember } from '../../src/helpers/actorMemory';
 import { loginInteractions } from '../../src/interactions/loginInteractions';
 import { loginTask } from '../../src/tasks/loginTask';
+
+Given('that an {actor} user has logged in', async (actor : Actor) => {
+    await loginInteractions.postLogin(constants.EMAIL, constants.PASSWORD);
+    await loginTask.validateSuccessLoginResponse(constants.EMAIL);
+});
 
 Given('that an {actor} user is registered', async (actor : Actor) => {
     Log.the(`${actor.name} wants to login into students system`).performAs(actorInTheSpotlight());

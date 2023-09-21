@@ -7,7 +7,7 @@
     "postinstall": "serenity-bdd update",
     "clean": "rimraf target",
     "test": "failsafe clean postinstall test:execute test:report",
-    "test:execute": "cross-env BASE_API_URL=http://localhost:3000 npx cucumber-js --publish-quiet --require-module ts-node/register --format @serenity-js/cucumber --tags @Api --require ./features/support/*.ts --require ./features/step-definitions/*.steps.ts",
+    "test:execute": "cross-env BASE_API_URL=http://localhost:3000 npx cucumber-js --publish-quiet --require-module ts-node/register --format @serenity-js/cucumber --tags @wip --require ./features/support/*.ts --require ./features/step-definitions/*.steps.ts",
     "test:report": "serenity-bdd run --features ./features",
     "start": "mkdirp target/site/serenity && npx http-server -p 8080 target/site/serenity -s -o",
     "lint": "eslint --ext ts --config .eslintrc.js .",
