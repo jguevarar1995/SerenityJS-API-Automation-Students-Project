@@ -3,10 +3,6 @@ import { Actor, Log, actorInTheSpotlight } from '@serenity-js/core';
 import { recall, remember } from '../../src/helpers/actorMemory';
 import { actorMemories } from '../../src/constants/actorMemories';
 import { loginInteractions } from '../../src/interactions/loginInteractions';
-import { LoginResponse } from '../../src/dtos/responses/loginResponse';
-import { loginQuestion } from '../../src/questions/loginQuestion';
-import { apiAsserts } from '../../src/tasks/apiAsserts';
-import { httpCodes } from '../../src/constants/httpCodes';
 import { loginTask } from '../../src/tasks/loginTask';
 
 Given('{actor} is a registered user',  async (actor : Actor) => {
@@ -19,9 +15,6 @@ When('login with email {string} and password {string}', async (email : string, p
 });
 
 Then('the login is finalized successfully', async () => {
-    await apiAsserts.statusCode(httpCodes.OK);
-
     const loginEmail : string = await recall(actorMemories.LOGIN_EMAIL); 
-
-    await loginTask.validateLoginResponse(loginEmail);
+    await loginTask.validateSuccessLoginResponse(loginEmail);
 });

@@ -4,9 +4,13 @@ import { assertEnsure } from "./assertEnsure";
 import { BussinessEnsure } from "./businessEnsure";
 import { equals } from "@serenity-js/assertions";
 import { customReportMessages } from "../constants/customReportMessages";
+import { httpCodes } from "../constants/httpCodes";
+import { apiAsserts } from "./apiAsserts";
 
 export const loginTask = {
-    validateLoginResponse: async(email: string) => {
+    validateSuccessLoginResponse: async(email: string) => {
+        await apiAsserts.statusCode(httpCodes.OK);
+        
         const isNotEmptyResponseBody = assertEnsure.that.isNotEqualTo(await loginQuestion.getLoginResponse(), {});
         await actorInTheSpotlight().attemptsTo(BussinessEnsure.that(isNotEmptyResponseBody, equals(true), customReportMessages.LOGIN_RESPONSE_BODY_IS_NOT_EMPTY, customReportMessages.LOGIN_RESPONSE_BODY_IS_EMPTY));
 
